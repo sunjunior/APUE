@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  1-3.c
+ *       Filename:  1-6.c
  *
- *    Description:  标准输入输出的程序实例
+ *    Description:  strerror和perror使用方法
  *
  *        Version:  1.0
- *        Created:  2017年08月27日 18时08分13秒
+ *        Created:  2017年08月27日 19时41分23秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -17,23 +17,14 @@
  */
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <errno.h>
 
-int main()
+int main(int argc, char *argv[])
 {
-    int c;
-    while ((c = getc(stdin)) != EOF)
-    {
-        if (putc(c,stdout) == EOF)
-        {
-            perror("output error");
-        }
-        if (c == '\n')
-        {
-            break;
-        }
-    }
-
-
+    fprintf(stderr, "EACCES: %s\n", strerror(EACCES));
+    errno = ENOENT;
+    perror(argv[0]);
 
     return 0;
 }
